@@ -1,0 +1,25 @@
+- Create ec2 instance to run kops.
+- Create a bucket
+- Create IAM for awscli to give access to kops
+- Create Hosted Zone (subdomain/domain for k8s) - add ns in godaddy
+- generate ssh key = ssh-keygen in ec2 helper
+- sudo apt update && sudo apt install awscli -y
+- aws configure (and provide IAM creds)
+- download and install kubectl from online link commands
+    - wget link
+    - chmod +x file
+    - mv file /usr/local/bin/
+- download and install kops release.
+
+
+kops create cluster --name=kubevpro.vidinsta.com \
+--state=s3://vprofile-masology-kops-state --zones=us-east-1a,us-east-1b \
+--node-count=2 --node-size=t3.small --control-plane-size=t3.small --dns-zone=kubevpro.vidinsta.com \
+--node-volume-size=8  --control-plane-volume-size=8
+
+kops update cluster --name kubevpro.vidinsta.com --yes --admin --state=s3://vprofile-masology-kops-state --yes --admin
+
+
+kops validate cluster --state=s3://vprofile-masology-kops-state
+
+kops delete cluster --name=kubevpro.vidinsta.com --state=s3://vprofile-masology-kops-state --yes
