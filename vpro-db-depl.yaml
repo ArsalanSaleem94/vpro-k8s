@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpro-db-depl
+  labels:
+    app: vpro-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vpro-db
+  template:
+    metadata:
+      labels:
+        app: vpro-db
+    spec:
+      containers:
+      - name: vpro-db
+        image: masology/vprofiledb:latest
+#        args:
+#          - "--ignore-db-dir=lost+found"
+#           - "ignore-db-dir-check"
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: vpro-db-storage
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: db-pass
+        ports:
+        - containerPort: 3306
+          name: mysql-port
+      nodeSelector:
+        zone: us-east-1a
+      volumes:
+        - name: vpro-db-storage
+          awsElasticBlockStore:
+            volumeID: vol-0cced8a29ae3ef060
+            fsType: ext4
+      initContainers: #above args wont work because of mysql version, but other flag can be tested.
+        - name: busybox
+          image: busybox:latest
+          args: ["rm", "-rf", "/var/lib/mysql/lost+found"]
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: vpro-db-storage
