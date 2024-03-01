@@ -33,7 +33,7 @@ spec:
         - containerPort: 3306
           name: mysql-port
       nodeSelector:
-        zone: us-east-1a
+        zones: us-east-1a
       volumes:
         - name: vpro-db-storage
           awsElasticBlockStore:
