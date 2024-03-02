@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: vpro-db
-        image: masology/vprofiledb:latest
+        image: vprofile/vprofiledb:V1
+#        image: masology/vprofiledb:latest
 #        args:
 #          - "--ignore-db-dir=lost+found"
 #           - "ignore-db-dir-check"
