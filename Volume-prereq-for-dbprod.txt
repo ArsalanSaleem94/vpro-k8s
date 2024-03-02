@@ -1,9 +1,0 @@
-- setup k8s
-- run this in kops:
-    - aws ec2 create-volume --availability-zone=us-east-1a --size=3 --volume-type=gp2
-- note id of vol.
-- vol-0cced8a29ae3ef060
-- label nodes w.r.t zones
-    - kubectl describe nodes i-0f3a5b2933f4b9beb | grep us-east-1
-    - kubectl label nodes i-0e7a810a314c0ddc5 zones=us-east-1b
-    
