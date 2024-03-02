@@ -36,10 +36,12 @@ spec:
       initContainers:
         - name: init-mydb
           image: busybox
-          command: ['sh', '-c', 'until nslookup vpro-db; do echo waiting for mydb; sleep 2; done;']
+          #command: ['sh', '-c', 'until nslookup vpro-db; do echo waiting for mydb; sleep 2; done;']
+          command: ['sh', '-c', 'sleep 2']
         - name: init-memcache
           image: busybox
-          command: ['sh', '-c', 'until nslookup vpro-memcache; do echo waiting for memcache; sleep 2; done;']
+          #command: ['sh', '-c', 'until nslookup vpro-memcache; do echo waiting for memcache; sleep 2; done;']
+          command: ['sh', '-c', 'sleep 2']
 ---
 apiVersion: v1
 kind: Service
