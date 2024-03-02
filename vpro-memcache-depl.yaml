@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpro-memcache-depl
+  labels:
+    app: vpro-memcache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vpro-memcache
+  template:
+    metadata:
+      labels:
+        app: vpro-memcache
+    spec:
+      containers:
+      - name: vpro-memcache
+        image: memcached
+        ports:
+        - containerPort: 11211
+          name: memcache-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vpro-memcache
+spec:
+  selector:
+    app: vpro-memcache
+  ports:
+    - protocol: TCP
+      port: 11211
+      targetPort: memcache-port
+  type: ClusterIP
