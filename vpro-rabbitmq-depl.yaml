@@ -20,14 +20,14 @@ spec:
         ports:
         - containerPort: 15672
           name: rabbitmq-port
-      env:
-      - name: RABBITMQ_DEFAULT_PASS
-        valueFrom:
-          secretKeyRef:
-            name: app-secret
-            key: rmq-pass
-      - name: RABBITMQ_DEFAULT_USER
-        value: guest
+        env:
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: rmq-pass
+        - name: RABBITMQ_DEFAULT_USER
+          value: guest
 ---
 apiVersion: v1
 kind: Service

@@ -20,19 +20,19 @@ spec:
         ports:
         - containerPort: 8080
           name: vproapp-port
-      env:
-      - name: MYSQL_ROOT_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: app-secret
-            key: db-pass
-      - name: RABBITMQ_DEFAULT_PASS
-        valueFrom:
-          secretKeyRef:
-            name: app-secret
-            key: rmq-pass
-      - name: RABBITMQ_DEFAULT_USER
-        value: guest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: db-pass
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: rmq-pass
+        - name: RABBITMQ_DEFAULT_USER
+          value: guest
       initContainers:
         - name: init-mydb
           image: busybox
