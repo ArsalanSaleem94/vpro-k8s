@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: vpro-memcache
+  name: vprocache01
 spec:
   selector:
     app: vpro-memcache
