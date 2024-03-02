@@ -38,7 +38,7 @@ spec:
       volumes:
         - name: vpro-db-storage
           awsElasticBlockStore:
-            volumeID: vol-0cced8a29ae3ef060
+            volumeID: vol-0e163ab8fdf661ebe
             fsType: ext4
       initContainers: #above args wont work because of mysql version, but other flag can be tested.
         - name: busybox
